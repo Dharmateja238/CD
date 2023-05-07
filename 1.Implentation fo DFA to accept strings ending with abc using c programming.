@@ -1,0 +1,59 @@
+//Implentation fo DFA to accept strings ending with abc using c programming.
+#include <stdio.h>
+const char* q0(char[] ,int len,int ci);
+const char* q1(char[] ,int len,int ci);
+const char* q2(char[] ,int len,int ci);
+const char* q3(char[] ,int len,int ci);
+
+int main()
+{
+    char in[500];
+    printf("Enter String with a's, b's and c's : ");
+    scanf("%s",in);
+    int l1=0;
+    for(int i=0;in[i]!='\0';i++)
+        l1+=1;
+    printf("length of the string %d\n",l1);
+    printf("%s",q0(in,l1,0));
+
+    return 0;
+}
+const char* q2(char a[],int len,int ci){
+    if(ci==len)
+        return "No";
+    if(a[ci]=='a')
+        return q1(a,len,ci+1);
+    if(a[ci]=='c')
+        return q3(a,len,ci+1);
+    return q0(a,len,ci+1);
+}
+const char* q3(char a[],int len,int ci){
+    if(ci==len)
+        return "Yes";
+    if(a[ci]=='a')
+        return q1(a,len,ci+1);
+    return q0(a,len,ci+1);
+}
+const char* q0(char a[],int len,int ci){
+    if(ci==len)
+        return "No";
+    if(a[ci]=='a')
+        return q1(a,len,ci+1);
+    return q0(a,len,ci+1);
+}
+const char* q1(char a[],int len,int ci){
+    if(ci==len)
+        return "No";
+    if(a[ci]=='b')
+        return q2(a,len,ci+1);
+    if(a[ci]=='a')
+        return q1(a,len,ci+1);
+    return q0(a,len,ci+1);
+}
+//input and output
+/*
+    Enter String with a's, b's and c's : abcabc
+    length of the string 6
+    Yes
+*/
+
